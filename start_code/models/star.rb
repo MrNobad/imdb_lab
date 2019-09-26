@@ -12,7 +12,7 @@ class Star
   end
 
   def save()
-    sql = "INSERT stars
+    sql = "INSERT INTO stars
     (
       first_name,
       last_name
@@ -27,7 +27,17 @@ class Star
     @id = star['id'].to_i
   end
 
+  def self.all
+    sql = "SELECT * FROM castings"
+    castings = SqlRunner.run( sql )
+    result = castings.map { |casting| Casting.new(casting)}
+    return result
+  end
 
+  def self.delete_all()
+    sql = "DELETE FROM castings"
+    SqlRunner.run( sql )
+  end
 
 
 

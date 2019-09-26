@@ -28,4 +28,23 @@ class Movie
       @id = movie['id'].to_i
   end
 
+  def self.all
+    sql = "SELECT * FROM movies"
+    movies = SqlRunner.run( sql )
+    return Movie.map_items(movies)
+  end
+
+  def self.delete_all
+    sql = "DELETE FROM movies"
+    SqlRunner.run ( sql )
+  end
+
+  def self.map_items(movie_hashes)
+    result = movie_hashes.map { |movie_hash| Movie.new(movie_hash) }
+    return result
+
+
+
+  end
+
 end
