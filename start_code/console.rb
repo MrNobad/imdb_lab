@@ -9,7 +9,6 @@ star1 = Star.new({
   'last_name' => 'Ford' })
   star1.save()
 
-
   star2 = Star.new({
     'first_name' => 'Ewan',
     'last_name' => 'McGregor' })
@@ -32,5 +31,30 @@ star1 = Star.new({
           movie2.save()
 
 
-          binding.pry
-          nil
+          casting1 = Casting.new({
+            'star_id' => star1.id,
+            'movie_id' => movie1.id,
+            'fee' => 10000 })
+            casting1.save()
+
+            casting2 = Casting.new({
+              'star_id' => star2.id,
+              'movie_id' => movie1.id,
+              'fee' => 20000 })
+              casting2.save()
+
+              casting3 = Casting.new({
+                'star_id' => star3.id,
+                'movie_id' => movie1.id,
+                'fee' => 50000 })
+                casting3.save()
+
+                casting4 = Casting.new({
+                  'star_id' => star2.id,
+                  'movie_id' => movie2.id,
+                  'fee' => 30000 })
+                  casting4.save()
+
+
+              binding.pry
+              nil

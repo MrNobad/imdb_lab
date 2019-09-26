@@ -1,4 +1,4 @@
-require_relative('./casting')
+require_relative('./star')
 require_relative('../db/sql_runner')
 
 class Movie
@@ -26,6 +26,18 @@ class Movie
       values = [@title, @genre]
       movie = SqlRunner.run( sql, values ).first
       @id = movie['id'].to_i
+  end
+
+  def star()
+    sql = "SELECT stars.*
+    FROM stars
+    INNER JOIN castings
+    ON stars.id = castings.star_id
+    WHERE castings.movie_id = $1"
+    values = [@id]
+    star_hashes = SqlRunner.run(sql, values)
+    result = star_hashes.map { |star_hash| Star.new(star_hash) }
+    return result
   end
 
   def update()

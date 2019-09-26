@@ -27,6 +27,18 @@ class Star
     @id = star['id'].to_i
   end
 
+  def movie()
+    sql = "SELECT movies.*
+    FROM movies
+    INNER JOIN castings
+    ON movies.id = castings.movie_id
+    WHERE castings.star_id = $1"
+    values = [@id]
+    movie_hashes = SqlRunner.run(sql, values)
+    result = movie_hashes.map { |movie_hash| Movie.new(movie_hash) }
+    return result
+  end
+
   def update()
     sql = "UPDATE stars SET (first_name, last_name) = ($1, $2) WHERE id = $3"
     values = [@first_name, @last_name, @id]

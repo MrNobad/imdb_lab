@@ -16,7 +16,7 @@ CREATE TABLE movies (
 
 CREATE TABLE castings (
   id SERIAL8 PRIMARY KEY,
-  movie_id INT8 REFERENCES movie(id) ON DELETE CASCADE,
-  star_id INT8 REFERENCES star(id) ON DELETE CASCADE,
+  movie_id INT8 REFERENCES movies(id) ON DELETE CASCADE,
+  star_id INT8 REFERENCES stars(id) ON DELETE CASCADE,
   fee INT8
 );

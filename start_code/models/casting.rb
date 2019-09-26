@@ -31,16 +31,30 @@ class Casting
     @id = casting['id'].to_i
   end
 
+  def star()
+    sql = "SELECT * FROM stars WHERE id = $1"
+    values = [@star_id]
+    star_hash = SqlRunner.run(sql, values).first()
+    return Star.new(star_hash)
+  end
+
+  def movie()
+    sql = "SELECT * FROM movies WHERE id = $1"
+    values = [@movie_id]
+    movie_hash = SqlRunner.run(sql, values).first()
+    return Movie.new(movie_hash)
+  end
+
 
   def self.all
-    sql = "SELECT * FROM stars"
-    stars = SqlRunner.run( sql )
-    result = stars.map { |star| Star.new(star)}
+    sql = "SELECT * FROM castings"
+    castings = SqlRunner.run( sql )
+    result = castings.map { |casting| Casting.new(casting)}
     return result
   end
 
   def self.delete_all()
-    sql = "DELETE FROM stars"
+    sql = "DELETE FROM castings"
     SqlRunner.run( sql )
   end
 
